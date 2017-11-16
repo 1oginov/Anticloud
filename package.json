@@ -1,0 +1,16 @@
+{
+  "name": "anticloud",
+  "version": "0.0.0",
+  "description": "Anticloud",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1oginov/Anticloud.git"
+  },
+  "author": "Danila Loginov <danila@loginov.rocks> (https://loginov.rocks)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/1oginov/Anticloud/issues"
+  },
+  "homepage": "https://github.com/1oginov/Anticloud"
+}
