@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/1oginov/Anticloud/issues"
   },
-  "homepage": "https://github.com/1oginov/Anticloud",
+  "homepage": ".",
   "dependencies": {
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
