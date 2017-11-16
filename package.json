@@ -23,14 +23,16 @@
     "@types/node": "^8.0.53",
     "@types/react": "^16.0.24",
     "@types/react-dom": "^16.0.3",
-    "electron": "^1.7.9"
+    "electron": "^1.7.9",
+    "foreman": "^2.0.0"
   },
   "scripts": {
-    "start": "react-scripts-ts start",
+    "start": "nf start",
+    "start:react": "react-scripts-ts start",
+    "start:electron": "node src/electron-wait-react",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "electron": "electron .",
-    "electron:dev": "set ELECTRON_START_URL=http://localhost:3000 && electron ."
+    "electron": "electron ."
   }
 }
