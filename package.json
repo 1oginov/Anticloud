@@ -2,7 +2,7 @@
   "name": "anticloud",
   "version": "0.0.0",
   "description": "Anticloud",
-  "main": "index.js",
+  "main": "src/electron-starter.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/1oginov/Anticloud.git"
@@ -22,12 +22,14 @@
     "@types/jest": "^21.1.6",
     "@types/node": "^8.0.53",
     "@types/react": "^16.0.24",
-    "@types/react-dom": "^16.0.3"
+    "@types/react-dom": "^16.0.3",
+    "electron": "^1.7.9"
   },
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "electron": "electron ."
   }
 }
