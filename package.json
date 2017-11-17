@@ -23,13 +23,15 @@
     "@types/node": "^8.0.53",
     "@types/react": "^16.0.24",
     "@types/react-dom": "^16.0.3",
+    "concurrently": "^3.5.0",
+    "cross-env": "^5.1.1",
     "electron": "^1.7.9",
-    "foreman": "^2.0.0"
+    "wait-on": "^2.0.2"
   },
   "scripts": {
-    "start": "nf start",
-    "start:react": "react-scripts-ts start",
-    "start:electron": "node src/electron-wait-react",
+    "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
+    "start:react": "cross-env BROWSER=none react-scripts-ts start",
+    "start:electron": "wait-on http://localhost:3000 && cross-env ELECTRON_START_URL=http://localhost:3000 npm run electron",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
