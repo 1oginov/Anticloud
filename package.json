@@ -2,7 +2,7 @@
   "name": "anticloud",
   "version": "0.0.0",
   "description": "Anticloud",
-  "main": "src/electron-starter.js",
+  "main": "main.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/1oginov/Anticloud.git"
@@ -31,7 +31,7 @@
   "scripts": {
     "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
     "start:react": "cross-env BROWSER=none react-scripts-ts start",
-    "start:electron": "wait-on http://localhost:3000 && cross-env ELECTRON_START_URL=http://localhost:3000 npm run electron",
+    "start:electron": "wait-on http://localhost:3000 && cross-env ELECTRON_URL=http://localhost:3000 npm run electron",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
