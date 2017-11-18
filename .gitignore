@@ -62,7 +62,9 @@ typings/
 .env.production.local
 
 # IntelliJ IDEA
-.idea/
+.idea/dictionaries/
+.idea/tasks.xml
+.idea/workspace.xml
 
 # production
 /build
