@@ -16,13 +16,9 @@
   "dependencies": {
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
-    "react-scripts-ts": "2.8.0"
+    "react-scripts": "1.0.17"
   },
   "devDependencies": {
-    "@types/jest": "^21.1.6",
-    "@types/node": "^8.0.53",
-    "@types/react": "^16.0.24",
-    "@types/react-dom": "^16.0.3",
     "concurrently": "^3.5.0",
     "cross-env": "^5.1.1",
     "electron": "^1.7.9",
@@ -30,11 +26,11 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
-    "start:react": "cross-env BROWSER=none react-scripts-ts start",
+    "start:react": "cross-env BROWSER=none react-scripts start",
     "start:electron": "wait-on http://localhost:3000 && cross-env ELECTRON_URL=http://localhost:3000 npm run electron",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
     "electron": "electron ."
   }
 }
