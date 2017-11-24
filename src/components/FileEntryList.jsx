@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 import FileEntry from '../classes/FileEntry';
 import FileEntryItem from './FileEntryItem';
-import { remote } from '../services/electron';
 
 class FileEntryList extends Component {
   constructor(props) {
@@ -11,8 +10,6 @@ class FileEntryList extends Component {
 
     this.state = {
       contents: [],
-      // TODO: It may be right to to lift the state up (https://reactjs.org/docs/lifting-state-up.html)
-      entry: props.initialEntry,
     };
 
     this.enterEntry = this.enterEntry.bind(this);
@@ -23,8 +20,20 @@ class FileEntryList extends Component {
     this.getEntryContents();
   }
 
-  getEntryContents(entry = this.state.entry) {
-    entry.getContents()
+  componentWillReceiveProps() {
+    this.setState({
+      contents: [],
+    });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.entry.path !== prevProps.entry.path) {
+      this.getEntryContents();
+    }
+  }
+
+  getEntryContents() {
+    this.props.entry.getContents()
       .then((entries) => {
         this.setState({
           contents: entries.map(entriesItem => (
@@ -38,19 +47,16 @@ class FileEntryList extends Component {
   }
 
   enterEntry(entry) {
-    this.setState({
-      entry,
-    });
-
-    this.getEntryContents(entry);
+    this.props.onEntryChange(entry);
   }
 
   enterParent() {
-    this.enterEntry(this.state.entry.getParent());
+    this.props.onEntryChange(this.props.entry.getParent());
   }
 
   render() {
-    const { contents, entry } = this.state;
+    const { entry } = this.props;
+    const { contents } = this.state;
     let button;
 
     if (entry.hasParent()) {
@@ -72,11 +78,8 @@ class FileEntryList extends Component {
 }
 
 FileEntryList.propTypes = {
-  initialEntry: PropTypes.instanceOf(FileEntry),
-};
-
-FileEntryList.defaultProps = {
-  initialEntry: new FileEntry(remote.process.env.HOME),
+  entry: PropTypes.instanceOf(FileEntry).isRequired,
+  onEntryChange: PropTypes.func.isRequired,
 };
 
 export default FileEntryList;
