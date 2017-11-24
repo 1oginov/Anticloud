@@ -16,6 +16,7 @@ class EntryList extends Component {
     };
 
     this.enterEntry = this.enterEntry.bind(this);
+    this.enterParent = this.enterParent.bind(this);
   }
 
   componentDidMount() {
@@ -44,12 +45,24 @@ class EntryList extends Component {
     this.getEntryContents(entry);
   }
 
+  enterParent() {
+    this.enterEntry(this.state.entry.getParent());
+  }
+
   render() {
     const { contents, entry } = this.state;
+    let button;
+
+    if (entry.hasParent()) {
+      button = <button onClick={this.enterParent}>Parent</button>;
+    }
 
     return (
       <div>
-        <div>{entry.path}</div>
+        <div>
+          {button}
+          {entry.path}
+        </div>
         <ul>
           {contents}
         </ul>

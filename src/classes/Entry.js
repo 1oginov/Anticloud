@@ -50,6 +50,38 @@ class Entry {
   }
 
   /**
+   * Has parent?
+   * @returns {boolean}
+   */
+  hasParent() {
+    return !!this.getParentPath();
+  }
+
+  /**
+   * Get parent path.
+   * @returns {string}
+   */
+  getParentPath() {
+    const parentPath = path.resolve(this.path, '..');
+
+    return parentPath !== this.path ? parentPath : '';
+  }
+
+  /**
+   * Get parent.
+   * @returns {Entry}
+   */
+  getParent() {
+    const parentPath = this.getParentPath();
+
+    if (!parentPath) {
+      throw new Error(`${this.path} has no parent`);
+    }
+
+    return new Entry(parentPath);
+  }
+
+  /**
    * Get contents.
    * @returns {Promise.<(Array.<Entry>|Error)>}
    */
