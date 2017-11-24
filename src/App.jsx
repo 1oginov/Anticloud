@@ -1,7 +1,7 @@
 import React from 'react';
 
-import EntryList from './components/EntryList';
+import FileEntryList from './components/FileEntryList';
 
-const App = () => <EntryList />;
+const App = () => <FileEntryList />;
 
 export default App;

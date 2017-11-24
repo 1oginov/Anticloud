@@ -5,11 +5,11 @@ const path = remote.require('path');
 const { shell } = remote;
 
 /**
- * Entry class.
+ * File Entry class.
  */
-class Entry {
+class FileEntry {
   /**
-   * Entry constructor.
+   * File Entry constructor.
    * @param {string} entryPath
    */
   constructor(entryPath) {
@@ -69,7 +69,7 @@ class Entry {
 
   /**
    * Get parent.
-   * @returns {Entry}
+   * @returns {FileEntry}
    */
   getParent() {
     const parentPath = this.getParentPath();
@@ -78,12 +78,12 @@ class Entry {
       throw new Error(`${this.path} has no parent`);
     }
 
-    return new Entry(parentPath);
+    return new FileEntry(parentPath);
   }
 
   /**
    * Get contents.
-   * @returns {Promise.<(Array.<Entry>|Error)>}
+   * @returns {Promise.<(Array.<FileEntry>|Error)>}
    */
   getContents() {
     return this.isDirectory()
@@ -99,7 +99,7 @@ class Entry {
               return;
             }
 
-            resolve(entriesNames.map(entryName => new Entry(path.join(this.path, entryName))));
+            resolve(entriesNames.map(entryName => new FileEntry(path.join(this.path, entryName))));
           });
         });
       });
@@ -121,4 +121,4 @@ class Entry {
   }
 }
 
-export default Entry;
+export default FileEntry;

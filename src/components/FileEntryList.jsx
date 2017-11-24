@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import Entry from '../classes/Entry';
-import EntryItem from './EntryItem';
+import FileEntry from '../classes/FileEntry';
+import FileEntryItem from './FileEntryItem';
 import { remote } from '../services/electron';
 
-class EntryList extends Component {
+class FileEntryList extends Component {
   constructor(props) {
     super(props);
 
@@ -28,7 +28,7 @@ class EntryList extends Component {
       .then((entries) => {
         this.setState({
           contents: entries.map(entriesItem => (
-            <EntryItem key={entriesItem.key} entry={entriesItem} onEnter={this.enterEntry} />
+            <FileEntryItem key={entriesItem.key} entry={entriesItem} onEnter={this.enterEntry} />
           )),
         });
       })
@@ -71,12 +71,12 @@ class EntryList extends Component {
   }
 }
 
-EntryList.propTypes = {
-  initialEntry: PropTypes.instanceOf(Entry),
+FileEntryList.propTypes = {
+  initialEntry: PropTypes.instanceOf(FileEntry),
 };
 
-EntryList.defaultProps = {
-  initialEntry: new Entry(remote.process.env.HOME),
+FileEntryList.defaultProps = {
+  initialEntry: new FileEntry(remote.process.env.HOME),
 };
 
-export default EntryList;
+export default FileEntryList;
