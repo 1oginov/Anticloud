@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import AddressBar from './components/AddressBar';
 import FileEntry from './classes/FileEntry';
 import FileEntryList from './components/FileEntryList';
-import { getInitialPath } from './services/preferences';
+import { getInitialPath, setInitialPath } from './services/preferences';
 import ParentFileEntryButton from './components/ParentFileEntryButton';
 
 class App extends Component {
@@ -19,6 +19,7 @@ class App extends Component {
 
   handleDirectoryChange(entry) {
     this.setState({ entry });
+    setInitialPath(entry.path);
   }
 
   render() {
