@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import AddressBar from './components/AddressBar';
 import FileEntry from './classes/FileEntry';
 import FileEntryList from './components/FileEntryList';
 import { getInitialPath } from './services/preferences';
@@ -26,6 +27,7 @@ class App extends Component {
     return (
       <div>
         <ParentFileEntryButton entry={entry} onEntryChange={this.handleDirectoryChange} />
+        <AddressBar entry={entry} onEntryChange={this.handleDirectoryChange} />
         <FileEntryList entry={entry} onEntryChange={this.handleDirectoryChange} />
       </div>
     );

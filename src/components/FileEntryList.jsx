@@ -19,10 +19,12 @@ class FileEntryList extends Component {
     this.getEntryContents();
   }
 
-  componentWillReceiveProps() {
-    this.setState({
-      contents: [],
-    });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.entry.path !== this.props.entry.path) {
+      this.setState({
+        contents: [],
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {
