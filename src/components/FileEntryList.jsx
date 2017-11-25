@@ -13,7 +13,6 @@ class FileEntryList extends Component {
     };
 
     this.enterEntry = this.enterEntry.bind(this);
-    this.enterParent = this.enterParent.bind(this);
   }
 
   componentDidMount() {
@@ -50,27 +49,14 @@ class FileEntryList extends Component {
     this.props.onEntryChange(entry);
   }
 
-  enterParent() {
-    this.props.onEntryChange(this.props.entry.getParent());
-  }
-
   render() {
-    const { entry } = this.props;
-    const { contents } = this.state;
-    let button;
-
-    if (entry.hasParent()) {
-      button = <button onClick={this.enterParent}>Parent</button>;
-    }
-
     return (
       <div>
         <div>
-          {button}
-          {entry.path}
+          {this.props.entry.path}
         </div>
         <ul>
-          {contents}
+          {this.state.contents}
         </ul>
       </div>
     );
