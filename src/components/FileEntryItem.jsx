@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import Entry from '../classes/Entry';
+import FileEntry from '../classes/FileEntry';
 
-class EntryItem extends Component {
+class FileEntryItem extends Component {
   constructor(props) {
     super(props);
 
@@ -50,9 +50,9 @@ class EntryItem extends Component {
   }
 }
 
-EntryItem.propTypes = {
-  entry: PropTypes.instanceOf(Entry).isRequired,
+FileEntryItem.propTypes = {
+  entry: PropTypes.instanceOf(FileEntry).isRequired,
   onEnter: PropTypes.func.isRequired,
 };
 
-export default EntryItem;
+export default FileEntryItem;
