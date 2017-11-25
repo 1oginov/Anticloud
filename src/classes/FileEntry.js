@@ -13,7 +13,7 @@ class FileEntry {
    * @param {string} entryPath
    */
   constructor(entryPath) {
-    this.path = entryPath;
+    this.path = path.resolve(path.normalize(entryPath));
     this.key = this.path;
     this.statsCache = undefined;
   }
