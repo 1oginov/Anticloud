@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import AddressBar from './components/AddressBar';
-import FileEntry from './classes/FileEntry';
-import FileEntryList from './components/FileEntryList';
-import { getInitialPath, setInitialPath } from './services/preferences';
-import ParentFileEntryButton from './components/ParentFileEntryButton';
+import AddressBar from './AddressBar';
+import FileEntry from '../classes/FileEntry';
+import FileEntryList from './FileEntryList';
+import { getInitialPath, setInitialPath } from '../services/preferences';
+import ParentFileEntryButton from './ParentFileEntryButton';
 
 class App extends Component {
   constructor(props) {
