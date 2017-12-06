@@ -24,7 +24,7 @@ class AddressBar extends Component {
   }
 
   handleError(error) {
-    // TODO: Replace alert with something... more interesting
+    // TODO: Replace alert with something... more interesting.
     alert(error);
     this.resetPathInput();
   }

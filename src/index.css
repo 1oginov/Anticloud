@@ -1,3 +1,15 @@
 body {
   font-family: sans-serif;
 }
+
+.not-available {
+  background: silver;
+}
+
+.directory {
+  color: green;
+}
+
+.file {
+  color: blue;
+}
