@@ -8,6 +8,7 @@ class FileEntryItem extends Component {
     super(props);
 
     this.state = {
+      isAvailable: undefined,
       isDirectory: undefined,
     };
 
@@ -15,35 +16,56 @@ class FileEntryItem extends Component {
   }
 
   componentDidMount() {
-    this.props.entry.isDirectory()
+    const { entry } = this.props;
+
+    entry.isAvailable()
+      .then((isAvailable) => {
+        this.setState({ isAvailable });
+        // Check if directory after availability check to prevent unnecessary calls to the file
+        // system.
+        return entry.isDirectory();
+      })
       .then(isDirectory => this.setState({ isDirectory }));
   }
 
   handleClick() {
     const { entry, onEnter } = this.props;
-    const { isDirectory } = this.state;
+    const { isAvailable, isDirectory } = this.state;
 
-    if (isDirectory === true) {
-      onEnter(entry);
-    } else if (isDirectory === false) {
-      entry.open();
+    if (isAvailable) {
+      if (isDirectory === true) {
+        onEnter(entry);
+      } else if (isDirectory === false) {
+        entry.open();
+      }
     }
   }
 
   render() {
     const { entry } = this.props;
-    const { isDirectory } = this.state;
+    const { isAvailable, isDirectory } = this.state;
+    const classes = [];
     let button;
 
+    if (isAvailable === false) {
+      classes.push('not-available');
+    }
+
     if (isDirectory === true) {
-      button = <button onClick={this.handleClick}>Enter</button>;
+      classes.push('directory');
+      if (isAvailable) {
+        button = <button onClick={this.handleClick}>Enter</button>;
+      }
     } else if (isDirectory === false) {
-      button = <button onClick={this.handleClick}>Open</button>;
+      classes.push('file');
+      if (isAvailable) {
+        button = <button onClick={this.handleClick}>Open</button>;
+      }
     }
 
     return (
-      <li>
-        {entry.path}
+      <li className={classes.join(' ')}>
+        {entry.getName()}
         {button}
       </li>
     );

@@ -15,7 +15,19 @@ class FileEntry {
   constructor(entryPath) {
     this.path = path.resolve(path.normalize(entryPath));
     this.key = this.path;
-    this.statsCache = undefined;
+
+    // Properties for cached values.
+    this.statsCached = undefined;
+    this.isAvailableCached = undefined;
+    this.isDirectoryCached = undefined;
+  }
+
+  /**
+   * Get name.
+   * @returns {string}
+   */
+  getName() {
+    return path.basename(this.path);
   }
 
   /**
@@ -23,30 +35,65 @@ class FileEntry {
    * @returns {Promise.<(Stats|Error)>}
    */
   getStats() {
-    if (this.statsCache !== undefined) {
-      return Promise.resolve(this.statsCache);
+    // Reject promise if not available, since `getStats` was already rejected.
+    if (this.isAvailableCached === false) {
+      return Promise.reject(new Error(`${this.path} is not available`));
+    }
+
+    if (this.statsCached !== undefined) {
+      return Promise.resolve(this.statsCached);
     }
 
     return new Promise((resolve, reject) => {
       fs.stat(this.path, (error, stats) => {
         if (error) {
+          this.isAvailableCached = false;
+
+          // Try to check if directory depending on error message.
+          if (error.message.indexOf('EPERM: operation not permitted') === 0) {
+            this.isDirectoryCached = true;
+          } else if (error.message.indexOf('EBUSY: resource busy or locked') === 0) {
+            this.isDirectoryCached = false;
+          }
+
           reject(error);
           return;
         }
 
-        this.statsCache = stats;
+        this.statsCached = stats;
+        this.isAvailableCached = true;
+        this.isDirectoryCached = stats.isDirectory();
         resolve(stats);
       });
     });
   }
 
   /**
+   * Is available?
+   * @returns {Promise.<boolean>}
+   */
+  isAvailable() {
+    if (this.isAvailableCached !== undefined) {
+      return Promise.resolve(this.isAvailableCached);
+    }
+
+    return this.getStats()
+      .then(() => this.isAvailableCached)
+      .catch(() => this.isAvailableCached);
+  }
+
+  /**
    * Is directory?
-   * @returns {Promise.<boolean|Error>}
+   * @returns {Promise.<boolean|undefined>}
    */
   isDirectory() {
+    if (this.isDirectoryCached !== undefined) {
+      return Promise.resolve(this.isDirectoryCached);
+    }
+
     return this.getStats()
-      .then(stats => stats.isDirectory());
+      .then(() => this.isDirectoryCached)
+      .catch(() => this.isDirectoryCached);
   }
 
   /**
