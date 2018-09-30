@@ -66,8 +66,8 @@ typings/
 .idea/tasks.xml
 .idea/workspace.xml
 
+# macOS
+.DS_Store
+
 # production
 /build
-
-# misc
-.DS_Store
