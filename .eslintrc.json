@@ -19,7 +19,6 @@
     "react"
   ],
   "rules": {
-    "linebreak-style": "off",
     "jsdoc/check-param-names": "error",
     "jsdoc/check-tag-names": "error",
     "jsdoc/check-types": "error",
