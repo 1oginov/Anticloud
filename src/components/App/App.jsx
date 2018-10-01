@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+/* @flow */
 
-import AddressBar from './AddressBar';
-import FileEntry from '../classes/FileEntry';
-import FileEntryList from './FileEntryList';
-import { getInitialPath, setInitialPath } from '../services/preferences';
-import ParentFileEntryButton from './ParentFileEntryButton';
+import * as React from 'react';
 
-class App extends Component {
+import AddressBar from '../AddressBar';
+import FileEntry from '../../classes/FileEntry';
+import FileEntryList from '../FileEntryList';
+import { getInitialPath, setInitialPath } from '../../services/preferences';
+import ParentFileEntryButton from '../ParentFileEntryButton';
+
+class App extends React.Component {
   constructor(props) {
     super(props);
 

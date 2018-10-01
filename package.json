@@ -33,6 +33,7 @@
     "recompose": "^0.30.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "babel-preset-flow": "^6.23.0",
     "concurrently": "^4.0.1",
     "cross-env": "^5.2.0",

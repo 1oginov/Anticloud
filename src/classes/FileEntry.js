@@ -1,40 +1,32 @@
+/* @flow */
+
 import { remote } from '../services/electron';
 
 const fs = remote.require('fs');
 const path = remote.require('path');
 const { shell } = remote;
 
-/**
- * File Entry class.
- */
-class FileEntry {
-  /**
-   * File Entry constructor.
-   * @param {string} entryPath
-   */
-  constructor(entryPath) {
+export default class FileEntry {
+  isAvailableCached: boolean;
+
+  isDirectoryCached: boolean;
+
+  key: string;
+
+  path: string;
+
+  statsCached: fs.Stats;
+
+  constructor(entryPath: string) {
     this.path = path.resolve(path.normalize(entryPath));
     this.key = this.path;
-
-    // Properties for cached values.
-    this.statsCached = undefined;
-    this.isAvailableCached = undefined;
-    this.isDirectoryCached = undefined;
   }
 
-  /**
-   * Get name.
-   * @returns {string}
-   */
   getName() {
     return path.basename(this.path);
   }
 
-  /**
-   * Get stats.
-   * @returns {Promise.<(Stats|Error)>}
-   */
-  getStats() {
+  getStats(): Promise<fs.Stats> {
     // Reject promise if not available, since `getStats` was already rejected.
     if (this.isAvailableCached === false) {
       return Promise.reject(new Error(`${this.path} is not available`));
@@ -68,10 +60,6 @@ class FileEntry {
     });
   }
 
-  /**
-   * Is available?
-   * @returns {Promise.<boolean>}
-   */
   isAvailable() {
     if (this.isAvailableCached !== undefined) {
       return Promise.resolve(this.isAvailableCached);
@@ -82,10 +70,6 @@ class FileEntry {
       .catch(() => this.isAvailableCached);
   }
 
-  /**
-   * Is directory?
-   * @returns {Promise.<boolean|undefined>}
-   */
   isDirectory() {
     if (this.isDirectoryCached !== undefined) {
       return Promise.resolve(this.isDirectoryCached);
@@ -96,29 +80,17 @@ class FileEntry {
       .catch(() => this.isDirectoryCached);
   }
 
-  /**
-   * Has parent?
-   * @returns {boolean}
-   */
   hasParent() {
     return !!this.getParentPath();
   }
 
-  /**
-   * Get parent path.
-   * @returns {string}
-   */
   getParentPath() {
     const parentPath = path.resolve(this.path, '..');
 
     return parentPath !== this.path ? parentPath : '';
   }
 
-  /**
-   * Get parent.
-   * @returns {FileEntry}
-   */
-  getParent() {
+  getParent(): FileEntry {
     const parentPath = this.getParentPath();
 
     if (!parentPath) {
@@ -128,11 +100,7 @@ class FileEntry {
     return new FileEntry(parentPath);
   }
 
-  /**
-   * Get contents.
-   * @returns {Promise.<(Array.<FileEntry>|Error)>}
-   */
-  getContents() {
+  getContents(): Promise<Array<FileEntry>> {
     return this.isDirectory()
       .then((isDirectory) => {
         if (!isDirectory) {
@@ -152,10 +120,6 @@ class FileEntry {
       });
   }
 
-  /**
-   * Open.
-   * @returns {Promise.<(boolean|Error)>}
-   */
   open() {
     return this.isDirectory()
       .then((isDirectory) => {
@@ -167,5 +131,3 @@ class FileEntry {
       });
   }
 }
-
-export default FileEntry;

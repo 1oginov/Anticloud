@@ -1,10 +1,12 @@
+/* @flow */
+
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import * as React from 'react';
 
-import FileEntry from '../classes/FileEntry';
-import FileEntryItem from './FileEntryItem';
+import FileEntry from '../../classes/FileEntry';
+import FileEntryItem from '../FileEntryItem';
 
-class FileEntryList extends Component {
+class FileEntryList extends React.Component {
   constructor(props) {
     super(props);
 
