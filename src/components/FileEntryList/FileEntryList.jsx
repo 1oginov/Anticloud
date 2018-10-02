@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
 
-import FileEntry from '../../classes/FileEntry';
+import FileEntry from '../../lib/FileEntry';
 import FileEntryItem from '../FileEntryItem';
 
 class FileEntryList extends React.Component {

@@ -1,5 +1,6 @@
 /* @flow */
 
 import App from './App';
+import enhance from './App.enhancer';
 
-export default App;
+export default enhance(App);

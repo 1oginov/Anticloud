@@ -3,38 +3,25 @@
 import * as React from 'react';
 
 import AddressBar from '../AddressBar';
-import FileEntry from '../../classes/FileEntry';
 import FileEntryList from '../FileEntryList';
-import { getInitialPath, setInitialPath } from '../../services/preferences';
-import ParentFileEntryButton from '../ParentFileEntryButton';
+import FileEntry from '../../lib/FileEntry';
+import ParentButton from '../ParentButton';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+export type Props = {
+  entry: FileEntry,
+  handleDirectoryChange: Function,
+};
 
-    this.state = {
-      entry: new FileEntry(getInitialPath()),
-    };
+const App = ({ entry, handleDirectoryChange }: Props) => (
+  <React.Fragment>
 
-    this.handleDirectoryChange = this.handleDirectoryChange.bind(this);
-  }
+    <ParentButton entry={entry} onEntryChange={handleDirectoryChange} />
 
-  handleDirectoryChange(entry) {
-    this.setState({ entry });
-    setInitialPath(entry.path);
-  }
+    <AddressBar entry={entry} onEntryChange={handleDirectoryChange} />
 
-  render() {
-    const { entry } = this.state;
+    <FileEntryList entry={entry} onEntryChange={handleDirectoryChange} />
 
-    return (
-      <div>
-        <ParentFileEntryButton entry={entry} onEntryChange={this.handleDirectoryChange} />
-        <AddressBar entry={entry} onEntryChange={this.handleDirectoryChange} />
-        <FileEntryList entry={entry} onEntryChange={this.handleDirectoryChange} />
-      </div>
-    );
-  }
-}
+  </React.Fragment>
+);
 
 export default App;

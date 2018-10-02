@@ -1,5 +1,6 @@
 /* @flow */
 
 import AddressBar from './AddressBar';
+import enhance from './AddressBar.enhancer';
 
-export default AddressBar;
+export default enhance(AddressBar);
