@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import AddressBar from '../AddressBar';
-import FileEntryList from '../FileEntryList';
+import FileList from '../FileList';
 import FileEntry from '../../lib/FileEntry';
 import ParentButton from '../ParentButton';
 
@@ -19,7 +19,7 @@ const App = ({ entry, handleDirectoryChange }: Props) => (
 
     <AddressBar entry={entry} onEntryChange={handleDirectoryChange} />
 
-    <FileEntryList entry={entry} onEntryChange={handleDirectoryChange} />
+    <FileList entry={entry} onEntryChange={handleDirectoryChange} />
 
   </React.Fragment>
 );
