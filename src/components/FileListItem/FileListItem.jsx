@@ -37,7 +37,7 @@ const FileListItem = ({
       {entry.getName()}
 
       {buttonName.length > 0 && (
-        <button onClick={handleClick}>{buttonName}</button>
+        <button onClick={handleClick} type="button">{buttonName}</button>
       )}
 
     </li>

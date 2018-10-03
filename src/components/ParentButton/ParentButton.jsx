@@ -11,7 +11,7 @@ export type Props = {
 
 const ParentButton = ({ entry, handleClick }: Props) => (
   entry.hasParent()
-    ? <button onClick={handleClick}>Parent</button>
+    ? <button onClick={handleClick} type="button">Parent</button>
     : null
 );
 

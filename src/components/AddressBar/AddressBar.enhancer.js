@@ -4,9 +4,11 @@ import {
   compose, lifecycle, withHandlers, withStateHandlers,
 } from 'recompose';
 
+import withErrorHandler from '../../enhancers/withErrorHandler';
 import FileEntry from '../../lib/FileEntry';
 
 export default compose(
+  withErrorHandler,
   withStateHandlers(
     {
       path: '',
@@ -19,17 +21,8 @@ export default compose(
   ),
   withHandlers({
 
-    handleError: ({ entry, handlePathChange }) => (error) => {
-      // TODO: Replace alert with something... more interesting.
-      alert(error);
-      handlePathChange(entry.path);
-    },
-
-  }),
-  withHandlers({
-
     handleSubmit: ({
-      entry, handleError, onEntryChange, path,
+      entry, errorHandler, handlePathChange, onEntryChange, path,
     }) => (event) => {
       event.preventDefault();
 
@@ -41,14 +34,14 @@ export default compose(
 
       testEntry.isDirectory()
         .then((isDirectory) => {
-          if (!isDirectory) {
-            handleError(`${testEntry.path} is not a directory`);
+          if (isDirectory !== true) {
+            handlePathChange(entry.path);
+            errorHandler(new Error(`${testEntry.path} is not a directory`));
             return;
           }
 
           onEntryChange(testEntry);
-        })
-        .catch(error => handleError(error));
+        });
     },
 
   }),

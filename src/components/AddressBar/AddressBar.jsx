@@ -13,7 +13,7 @@ const AddressBar = ({ handlePathChange, handleSubmit, path }: Props) => (
 
     <input onChange={handlePathChange} type="text" value={path} />
 
-    <button>Go</button>
+    <button type="submit">Go</button>
 
   </form>
 );

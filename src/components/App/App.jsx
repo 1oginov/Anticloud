@@ -3,6 +3,7 @@
 import * as React from 'react';
 
 import AddressBar from '../AddressBar';
+import ErrorBoundary from '../ErrorBoundary';
 import FileList from '../FileList';
 import FileEntry from '../../lib/FileEntry';
 import ParentButton from '../ParentButton';
@@ -13,7 +14,7 @@ export type Props = {
 };
 
 const App = ({ entry, handleDirectoryChange }: Props) => (
-  <React.Fragment>
+  <ErrorBoundary>
 
     <ParentButton entry={entry} onEntryChange={handleDirectoryChange} />
 
@@ -21,7 +22,7 @@ const App = ({ entry, handleDirectoryChange }: Props) => (
 
     <FileList entry={entry} onEntryChange={handleDirectoryChange} />
 
-  </React.Fragment>
+  </ErrorBoundary>
 );
 
 export default App;
