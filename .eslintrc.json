@@ -1,19 +1,54 @@
 // Create React App webpack configuration only checks rules predifined by "react-app", but here we specify its default
 // config and more strict rules to check for them using our custom command "lint" and with the help of the IDE.
 {
-  "parser": "babel-eslint",
-  "extends": [
-    "react-app",
-    "airbnb"
-  ],
-  "plugins": [
-    "import",
-    "jsx-a11y",
-    "react"
-  ],
   "env": {
     "browser": true,
     "jest": true,
     "node": true
+  },
+  "extends": [
+    "airbnb",
+    "react-app"
+  ],
+  "parser": "babel-eslint",
+  "plugins": [
+    "flowtype",
+    "import",
+    "jsdoc",
+    "jsx-a11y",
+    "react"
+  ],
+  "rules": {
+    "jsdoc/check-param-names": "error",
+    "jsdoc/check-tag-names": "error",
+    "jsdoc/check-types": "error",
+    "jsdoc/newline-after-description": "error",
+    "jsdoc/no-undefined-types": "error",
+    "jsdoc/require-description-complete-sentence": "error",
+    "jsdoc/require-param": "error",
+    "jsdoc/require-param-name": "error",
+    "jsdoc/require-param-type": "error",
+    "jsdoc/require-returns-type": "error",
+    "jsdoc/valid-types": "error",
+    "sort-keys": [
+      "error",
+      "asc",
+      {
+        "caseSensitive": false,
+        "natural": true
+      }
+    ],
+    "valid-jsdoc": [
+      "error",
+      {
+        "requireParamDescription": false,
+        "requireReturnDescription": false
+      }
+    ]
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": false
+    }
   }
 }

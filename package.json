@@ -12,29 +12,39 @@
   "bugs": {
     "url": "https://github.com/1oginov/Anticloud/issues"
   },
-  "homepage": ".",
+  "homepage": "https://github.com/1oginov/Anticloud",
+  "scripts": {
+    "build": "react-scripts build",
+    "electron": "electron .",
+    "flow": "flow",
+    "lint": "eslint --ext .js,.jsx main.js src",
+    "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
+    "start:electron": "wait-on http://localhost:3000 && cross-env ELECTRON_URL=http://localhost:3000 npm run electron",
+    "start:react": "cross-env BROWSER=none react-scripts start",
+    "test": "react-scripts test --env=jsdom"
+  },
   "dependencies": {
-    "electron": "^1.8.2",
-    "electron-store": "^1.3.0",
-    "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
+    "classnames": "^2.2.6",
+    "electron": "^3.0.2",
+    "electron-store": "^2.0.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "1.1.5",
+    "recompose": "^0.30.0"
   },
   "devDependencies": {
-    "concurrently": "^3.5.1",
-    "cross-env": "^5.1.3",
-    "eslint-config-airbnb": "^16.1.0",
-    "wait-on": "^2.1.0"
-  },
-  "scripts": {
-    "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
-    "start:react": "cross-env BROWSER=none react-scripts start",
-    "start:electron": "wait-on http://localhost:3000 && cross-env ELECTRON_URL=http://localhost:3000 npm run electron",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "electron": "electron .",
-    "lint": "eslint --ext .js,.jsx main.js src/"
+    "babel-eslint": "^10.0.1",
+    "babel-preset-flow": "^6.23.0",
+    "concurrently": "^4.0.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-flowtype": "^2.50.3",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsdoc": "^3.8.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.81.0",
+    "wait-on": "^3.0.1"
   }
 }
