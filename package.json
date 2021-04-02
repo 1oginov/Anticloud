@@ -3,6 +3,16 @@
   "version": "0.2.0",
   "description": "Anticloud",
   "main": "main.js",
+  "scripts": {
+    "build": "react-scripts build",
+    "electron": "electron .",
+    "flow": "flow",
+    "lint": "eslint --ext .js,.jsx main.js src",
+    "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
+    "start:electron": "wait-on http://localhost:3000 && cross-env ELECTRON_URL=http://localhost:3000 npm run electron",
+    "start:react": "cross-env BROWSER=none react-scripts start",
+    "test": "react-scripts test --env=jsdom"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/loginov-rocks/Anticloud.git"
@@ -14,16 +24,6 @@
     "url": "https://github.com/loginov-rocks/Anticloud/issues"
   },
   "homepage": "https://github.com/loginov-rocks/Anticloud",
-  "scripts": {
-    "build": "react-scripts build",
-    "electron": "electron .",
-    "flow": "flow",
-    "lint": "eslint --ext .js,.jsx main.js src",
-    "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
-    "start:electron": "wait-on http://localhost:3000 && cross-env ELECTRON_URL=http://localhost:3000 npm run electron",
-    "start:react": "cross-env BROWSER=none react-scripts start",
-    "test": "react-scripts test --env=jsdom"
-  },
   "dependencies": {
     "classnames": "^2.2.6",
     "electron": "^3.0.2",
